@@ -45,14 +45,14 @@ $(function () {
     },
 
     addStock: function (e) {
-      console.log(window.portfolioCollection);
-      if (!window.portfolioCollection.findWhere({name: $('#companyName').val()})) {
-        var newModel = new window.StockModel({
+      console.log(window.internshipCollection);
+      if (!window.internshipCollection.findWhere({name: $('#companyName').val()})) {
+        var newModel = new window.InternshipModel({
           name: $('#companyName').val(),
           link: $('#companyLink').val(),
           status: $('#companyStatus').find(":selected").val()
         });
-        window.portfolioCollection.add(newModel);
+        window.internshipCollection.add(newModel);
       }
     }
 

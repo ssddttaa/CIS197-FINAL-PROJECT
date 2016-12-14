@@ -1,5 +1,5 @@
 $(function () {
-  var PortfolioView = Backbone.View.extend({
+  var InternshipsView = Backbone.View.extend({
     className: 'portfolio-container',
     $el       : $('#app-container'),
     template: Handlebars.compile($('#portfolio-template').html()),
@@ -35,5 +35,5 @@ $(function () {
 
   });
 
-  window.PortfolioView = PortfolioView;
+  window.InternshipsView = InternshipsView;
 });
