@@ -11,15 +11,15 @@ $(function () {
     console.log("did get request");
     console.log(data);
   });
-
-  window.portfolioView = new window.InternshipsView({
+  
+  window.internshipView = new window.InternshipsView({
     collection: window.internshipCollection
   });
   window.searchView = new window.SearchView({
     collection: window.searchResultsCollection
   });
   window.searchView.render();
-  window.portfolioView.render();
+  window.internshipView.render();
   $('#app-container').append(window.searchView.$el);
-  $('#app-container').append(window.portfolioView.$el);
+  $('#app-container').append(window.internshipView.$el);
 });

@@ -45,7 +45,7 @@ var getUserID = function(data, response){
 
     client.get('https://api.linkedin.com/v1/people/~?format=json', args, storeUserIDInDataBase);
   } else {
-    console.log("Uh oh!");
+    redirectRes.redirect("http://localhost:3000")
   }
 };
 

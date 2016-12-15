@@ -7,7 +7,6 @@
         <script src="js/lib/underscore-min.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/lib/backbone-min.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/lib/handlebars.js" type="text/javascript" charset="utf-8"></script>
-        <script src="js/lib/socket.io.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/lib/bootstrap.min.js"></script>
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/style.css">
@@ -16,8 +15,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2" id="app-container">
-                    <h1 align="center">CIS 197 Portfolio Manager</h1>
-                    <hr />
+                    <h1 align="left">Internship Manager</h1>
                 </div>
             </div>
         </div>
@@ -42,16 +40,6 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {{#if results.length}}
-                    {{#each results}}
-                        <tr class="row">
-                            <td class="col-md-6"><a href="#{{symbol}}">{{symbol}}</a></td>
-                            <td class="col-md-6">{{price}}</td>
-                            <td class="col-md-6">{{price}}</td>
-                            <td class="col-md-6"><button type="button" class="btn btn-default add-stock" symbol="{{symbol}}" price="{{price}}">Add</button></td>
-                        </tr>
-                    {{/each}}
-                    {{/if}}
                     <tr class="row">
                         <td class="col-md-6"><input type = "text" id = "companyName"></td>
                         <td class="col-md-6"><input type = "text" id = "companyLink"></td>
@@ -87,7 +75,13 @@
                     <tr class="row">
                         <td class="col-md-6">{{name}}</td>
                         <td class="col-md-6">{{link}}</td>
-                        <td class="col-md-6">{{status}}</td>
+                        <td class="col-md-6">
+                            <select class = "form-control company-status" id = {{name}} data-selected = {{status}}>
+                                <option class = "accepted"> Accepted </option>
+                                <option class = "pending"> Pending </option>
+                                <option class = "rejected"> Rejected </option>
+                            </select>
+                        </td>
                         <td class="col-md-6"><button type="button" class="btn btn-default delete-stock" symbol="{{name}}">Delete</button></td>
                     </tr>
                 {{/each}}
@@ -107,7 +101,7 @@
         </script>
         <script src="js/models/InternshipModel.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/collections/InternshipCollection.js" type="text/javascript" charset="utf-8"></script>
-        <script src="js/views/PortfolioView.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/views/InternshipView.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/views/SearchView.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/init.js" type="text/javascript" charset="utf-8"></script>
     </body>
