@@ -3,9 +3,16 @@ var eslint = require('gulp-eslint');
 var zip = require('gulp-zip');
 
 var JS = [
-  'js/collections/*.js',
-  'js/routers/*.js',
-  'js/views/*.js'
+  'public/js/collections/*.js',
+  'public/js/routers/*.js',
+  'public/js/views/*.js',
+  'public/js/models/*.js',
+  'public/js/indexPage.js',
+  'public/js/init.js',
+  'app.js',
+  'bin/*.js',
+  'db/*.js',
+  'middlewares/*.js',
 ];
 
 var FILES = [

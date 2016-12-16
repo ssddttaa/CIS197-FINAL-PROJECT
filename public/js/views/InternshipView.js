@@ -1,8 +1,8 @@
 $(function () {
   var InternshipsView = Backbone.View.extend({
-    className: 'portfolio-container',
-    $el       : $('#app-container'),
-    template: Handlebars.compile($('#portfolio-template').html()),
+    className: 'internship-container',
+    $el: $('#app-container'),
+    template: Handlebars.compile($('#internship-template').html()),
     initialize: function () {
       this.listenTo(this.collection, 'add', this.onChange);
       this.listenTo(this.collection, 'remove', this.onChange);
@@ -10,39 +10,39 @@ $(function () {
     },
 
     events: {
-      'click .delete-stock' : 'deleteStock',
-      'change .company-status' : 'changeStockStatus'
+      'click .delete-internship': 'deleteInternship',
+      'change .company-status': 'changeInternshipStatus'
     },
 
     onChange: function () {
       var jsonCollection = {
-        "companies" : this.collection.toJSON()
+        companies: this.collection.toJSON()
       };
-      $.post("http://localhost:3000/internship/update", {
-          internships : jsonCollection
+      $.post('http://localhost:3000/internship/update', {
+        internships: jsonCollection
       });
       this.render();
     },
 
     render: function () {
-      var html = this.template({stocks: this.collection.toJSON()});
+      var html = this.template({internships: this.collection.toJSON()});
       this.$el.html(html);
       setStatuses();
       return this;
     },
 
-    deleteStock: function (e) {
-      this.collection.remove(this.collection.where({name: $(e.target).attr('symbol')}));
+    deleteInternship: function (e) {
+      this.collection.remove(this.collection.where({name: $(e.target).attr('company-name')}));
     },
 
-    changeStockStatus: function (e) {
+    changeInternshipStatus: function (e) {
       var newInternship = new window.InternshipModel({
         name: $(e.target).parent().parent().find('td').eq(0).html(),
-        link: $(e.target).parent().parent().find('td').eq(1).html(),
-        status: $(e.target).find("option:selected").eq(0).text()
+        link: $(e.target).parent().parent().find('a').eq(0).attr('href'),
+        status: $(e.target).find('option:selected').eq(0).text()
       });
 
-      this.collection.remove(this.collection.where({name: $(e.target).parent().parent().find('button').attr('symbol')}));
+      this.collection.remove(this.collection.where({name: $(e.target).parent().parent().find('button').attr('company-name')}));
       this.collection.add([newInternship]);
     }
 
@@ -51,18 +51,27 @@ $(function () {
   window.InternshipsView = InternshipsView;
 });
 
-var setStatuses = function(){
+var setStatuses = function () {
   var renderedInternships = $(document).find('select');
-  for(var i = 0 ; i < renderedInternships.length ; i ++) {
-    if ($(renderedInternships[i]).data("selected") == "Accepted") {
-      console.log("accepted");
-      $(renderedInternships[i]).find('.accepted').eq(0).attr("selected", "selected");
-    } else if ($(renderedInternships[i]).data("selected") == "Pending") {
-      console.log("pending");
-      $(renderedInternships[i]).find('.pending').eq(0).attr("selected", "selected");
-    } else if ($(renderedInternships[i]).data("selected") == "Rejected") {
-      console.log("rejected");
-      $(renderedInternships[i]).find('.rejected').eq(0).attr("selected", "selected");
+  for (var i = 0; i < renderedInternships.length; i++) {
+    if ($(renderedInternships[i]).data('selected') == 'Accepted') {
+      console.log('accepted');
+      $(renderedInternships[i]).find('.accepted').eq(0).attr('selected', 'selected');
+      $(renderedInternships[i]).parent().parent().addClass('accepted-row');
+    } else if ($(renderedInternships[i]).data('selected') == 'Pending') {
+      console.log('pending');
+      $(renderedInternships[i]).find('.pending').eq(0).attr('selected', 'selected');
+      $(renderedInternships[i]).parent().parent().addClass('pending-row');
+    } else if ($(renderedInternships[i]).data('selected') == 'Rejected') {
+      console.log('rejected');
+      $(renderedInternships[i]).find('.rejected').eq(0).attr('selected', 'selected');
+      $(renderedInternships[i]).parent().parent().addClass('rejected-row');
     }
   }
+  console.log('setting statuses');
+  console.log($('#logout'));
+  $('#logout').click(function () {
+    console.log('clicking tho');
+    window.location.href = 'http://localhost:3000/login/logout';
+  });
 };

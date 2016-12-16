@@ -11,25 +11,25 @@ var getUsersReq;
 var getUsersRes;
 var nextError;
 
-router.post('/regular', function(req, res, next){
+router.post('/regular', function (req, res, next) {
   nextError = next;
   getUsersReq = req;
   getUsersRes = res;
-  console.log("posted to regular");
-  var collection = mongo["db"].collection('regular_users').find({
-    email : req.body.email,
+  console.log('posted to regular');
+  var collection = mongo['db'].collection('regular_users').find({
+    email: req.body.email,
     password: req.body.password
-  }, function(error, cursor){
+  }, function (error, cursor) {
     cursor.toArray(getUsersCallback);
   });
 });
 
-var getUsersCallback = function(error, response){
-  if(response.length > 0){
-    nextError("User already exists");
+var getUsersCallback = function (error, response) {
+  if (response.length > 0) {
+    nextError('User already exists');
   } else {
-    console.log("isnerting");
-    mongo["db"].collection("regular_users").insert({
+    console.log('isnerting');
+    mongo['db'].collection('regular_users').insert({
       email: getUsersReq.body.email,
       password: getUsersReq.body.password
     });
@@ -37,7 +37,7 @@ var getUsersCallback = function(error, response){
     getUsersReq.session.password = getUsersReq.body.password;
     getUsersReq.session.isAuthorized = true;
   }
-  getUsersRes.redirect("/");
+  getUsersRes.redirect('/');
 };
 
 module.exports = router;

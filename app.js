@@ -19,8 +19,8 @@ var generateCookieSecret = function () {
 };
 
 app.use(cookieSession({
-  name : 'InternshipTrackerSession',
-  secret:generateCookieSecret()
+  name: 'InternshipTrackerSession',
+  secret: generateCookieSecret()
 }));
 
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
@@ -29,16 +29,14 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 
 app.get('/', checkCookie, function (req, res) {
   console.log(req.session);
-  if(req.session.isAuthorized){
+  console.log('checking the session');
+  if (req.session.isAuthorized) {
     res.render('Internships');
   } else {
     res.render('index');
   }
 });
 
-
-
-console.log("using loginrouter");
 
 app.use('/login', loginRouter);
 app.use('/signup', signupRouter);

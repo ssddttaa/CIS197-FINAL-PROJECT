@@ -11,7 +11,9 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/style.css">
     </head>
-    <body>
+    <body class = "striped-background">
+    <div id = "alert"></div>
+    <div class = "internships-container">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2" id="app-container">
@@ -20,23 +22,15 @@
             </div>
         </div>
 
-
-        <script id="search-bar-template" type="text/x-handlebars-template">
-            <div class="col-md-6  col-md-offset-3">
-                <input type="text" name="search" class="search form-control" value="" autocomplete="off" placeholder="Search for..."/>
-            </div><br><br>
-        </script>
-
-        <script id="search-results-template" type="text/x-handlebars-template">
-            <div class="search-results">
-
-                <table class="result-table" class="table table-hover">
+        <script id="add-internship-template" type="text/x-handlebars-template">
+            <div class="add-internship">
+                <table>
                     <thead>
                     <tr class="row">
-                        <th class="col-md-6">Company Name</th>
-                        <th class="col-md-6">Link</th>
-                        <th class="col-md-6">Status</th>
-                        <th class="col-md-6">Action</th>
+                        <th class="col-md-3">Company Name</th>
+                        <th class="col-md-3">Link</th>
+                        <th class="col-md-3">Status</th>
+                        <th class="col-md-3">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -44,13 +38,13 @@
                         <td class="col-md-6"><input type = "text" id = "companyName"></td>
                         <td class="col-md-6"><input type = "text" id = "companyLink"></td>
                         <td class="col-md-6">
-                            <select class = "form-control" id = "companyStatus">
+                            <select class = "form-control enforce-min-width" id = "companyStatus">
                                 <option> Accepted </option>
                                 <option> Pending </option>
                                 <option> Rejected </option>
                             </select>
                         </td>
-                        <td class="col-md-6"><button type="button" class="btn btn-default add-stock" symbol="{{symbol}}" price="{{price}}">Add</button></td>
+                        <td class="col-md-6"><button type="button" class="btn btn-default add-Internship" symbol="{{symbol}}" price="{{price}}">Add</button></td>
                     </tr>
                     </tbody>
                 </table>
@@ -58,51 +52,46 @@
             </div>
         </script>
 
-        <script id="portfolio-template" type="text/x-handlebars-template">
-            <h2> My Portfolio </h2>
+        <script id="internship-template" type="text/x-handlebars-template">
+            <h2> Internships </h2>
 
-            <table class="portfolio-table" class="table table-hover">
+            <table class="internship-table" class="table table-hover">
                 <thead>
                     <tr class="row">
                         <th class="col-md-6">Company Name</th>
-                        <th class="col-md-6">Link</th>
+                        <th class="col-md-6">Application Link</th>
                         <th class="col-md-6">Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                {{#if stocks.length}}
-                {{#each stocks}}
+                {{#if internships.length}}
+                {{#each internships}}
                     <tr class="row">
                         <td class="col-md-6">{{name}}</td>
-                        <td class="col-md-6">{{link}}</td>
-                        <td class="col-md-6">
+                        <td class="col-md-6"><a href = {{link}} target = "_blank">Link</a></td>
+                        <td class="col-md-6 enforce-min-width">
                             <select class = "form-control company-status" id = {{name}} data-selected = {{status}}>
                                 <option class = "accepted"> Accepted </option>
                                 <option class = "pending"> Pending </option>
                                 <option class = "rejected"> Rejected </option>
                             </select>
                         </td>
-                        <td class="col-md-6"><button type="button" class="btn btn-default delete-stock" symbol="{{name}}">Delete</button></td>
+                        <td class="col-md-6"><button type="button" class="btn btn-default delete-internship" company-name="{{name}}">Delete</button></td>
                     </tr>
                 {{/each}}
                 {{/if}}
 
                 </tbody>
             </table>
+            <br>
+            <button type="button" class="btn btn-default" id = "logout">Sign out</button>
+            </script>
+        </div>
 
-        </script>
-
-        <script id="single-stock-template" type="text/x-handlebars-template">
-            <div class="row">
-                <div class="col-sm-8 col-sm-offset-2">
-                    <div><span class="single-stock symbol">{{symbol}}:</span> <span class="single-stock price">{{price}}</span></div>
-                </div>
-            </div>
-        </script>
         <script src="js/models/InternshipModel.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/collections/InternshipCollection.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/views/InternshipView.js" type="text/javascript" charset="utf-8"></script>
-        <script src="js/views/SearchView.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/views/AddInternshipView.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/init.js" type="text/javascript" charset="utf-8"></script>
     </body>
 </html>

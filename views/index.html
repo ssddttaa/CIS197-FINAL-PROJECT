@@ -11,46 +11,46 @@
   <link rel="stylesheet" href="css/style.css">
 
 </head>
-<body>
-  <div class = "col-xs-4"></div>
-  <div class = "col-xs-4 loginBox">
-    <div class = "col-xs-1"></div>
-    <div class = "col-xs-10">
-      <br>
-      <form method = "post" id = "sign-in-form">
-        <div class = "form-group">
-          <label for="inputEmail">Email address</label>
-          <input type="email" class="form-control" id="inputEmail" name = "email" placeholder="Email" value = "lol@gmail.com">
-        </div>
-        <div class = "form-group">
-          <label for="passwordInput">Password</label>
-          <input type="password" class="form-control" id="passwordInput" name = "password" placeholder="Password" value = "lol">
-        </div>
-        <div class = "sign-in-container">
-          <button class="btn btn-default loginButton" type="button">Log In</button>
-          <br>
-          <a class = "sign-up">Don't have an account? Sign up here!</a>
-          <a class="btn btn-block btn-social btn-linkedin" href = "login/linkedin">
-            <span class="fa fa-linkedin"></span> Sign in with Linkedin
-          </a>
-        </div>
-
-        <div class = "sign-up-container">
-          <button class="btn btn-default signupButton" type="button">Sign Up</button>
-          <br>
-          <a class = "login-text">Already have an account? Log in here!</a>
-          <a class="btn btn-block btn-social btn-linkedin" href = "login/linkedin">
-            <span class="fa fa-linkedin"></span> Sign in with Linkedin
-          </a>
-        </div>
-
+<body class = "background-class">
+  <div class = "container background-class">
+  <div class = "login-box-container">
+    <div class = "col-xs-12 loginBox">
+      <div class = "col-xs-1"></div>
+      <div class = "col-xs-10">
         <br>
-      </form>
-    </div>
-    <div class = "col-xs-1"></div>
-  </div>
-  <div class = "col-xs-4"></div>
+        <form method = "post" id = "sign-in-form">
+          <div class = "form-group">
+            <label for="inputEmail">Email address</label>
+            <input type="email" class="form-control" id="inputEmail" name = "email" placeholder="Email">
+          </div>
+          <div class = "form-group">
+            <label for="passwordInput">Password</label>
+            <input type="password" class="form-control" id="passwordInput" name = "password" placeholder="Password">
+          </div>
+          <div class = "sign-in-container">
+            <button class="btn btn-default loginButton" type="button">Log In</button>
+            <br>
+            <a class = "sign-up">Don't have an account? Sign up here!</a>
+            <a class="btn btn-block btn-social btn-linkedin" href = "login/linkedin">
+              <span class="fa fa-linkedin"></span> Sign in with Linkedin
+            </a>
+          </div>
 
+          <div class = "sign-up-container">
+            <button class="btn btn-default signupButton" type="button">Sign Up</button>
+            <br>
+            <a class = "login-text">Already have an account? Log in here!</a>
+            <a class="btn btn-block btn-social btn-linkedin" href = "login/linkedin">
+              <span class="fa fa-linkedin"></span> Sign in with Linkedin
+            </a>
+          </div>
+          <br>
+        </form>
+      </div>
+      <div class = "col-xs-1"></div>
+    </div>
+  </div>
+  </div>
   <script src = "js/jquery-1.11.3.js"></script>
   <script src = "js/indexPage.js"></script>
 </body>

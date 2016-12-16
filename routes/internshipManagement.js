@@ -13,25 +13,31 @@ var router = express.Router();
 
 var internshipRes;
 
-router.post('/update', function(req, res, next){
-  console.log("update happening");
-  if(req.session && req.session.userID && req.session.oauthToken) {
-    mongo["db"].collection('linkedin_users').update({"id" : req.session.userID}, {$set : {internships : req.body.internships}});
-  } else if(req.session.email && req.session.password){
-    mongo["db"].collection('regular_users').update({"email" : req.session.email, "password" : req.session.password}, {$set : {internships : req.body.internships}});
+router.post('/update', function (req, res, next) {
+  console.log('update happening');
+  if (req.session && req.session.userID && req.session.oauthToken) {
+    mongo['db'].collection('linkedin_users').update({'id': req.session.userID}, {$set: {internships: req.body.internships}});
+  } else if (req.session.email && req.session.password) {
+    mongo['db'].collection('regular_users').update({
+      'email': req.session.email,
+      'password': req.session.password
+    }, {$set: {internships: req.body.internships}});
   }
   res.end();
 });
 
-router.get('/retrieve', function(req, res, next){
+router.get('/retrieve', function (req, res, next) {
   internshipRes = res;
-  if(req.session && req.session.userID && req.session.oauthToken) {
-    console.log("user id:" + req.session.userID);
-    mongo["db"].collection('linkedin_users').find({"id" : req.session.userID}, function(error, cursor){
+  if (req.session && req.session.userID && req.session.oauthToken) {
+    console.log('user id:' + req.session.userID);
+    mongo['db'].collection('linkedin_users').find({'id': req.session.userID}, function (error, cursor) {
       cursor.toArray(getInternshipsCallback);
     });
-  } else if(req.session.email && req.session.password){
-    mongo["db"].collection('regular_users').find({"email" : req.session.email, "password" : req.session.password}, function(error, cursor){
+  } else if (req.session.email && req.session.password) {
+    mongo['db'].collection('regular_users').find({
+      'email': req.session.email,
+      'password': req.session.password
+    }, function (error, cursor) {
       cursor.toArray(getInternshipsCallback);
     });
   } else {
@@ -39,15 +45,15 @@ router.get('/retrieve', function(req, res, next){
   }
 });
 
-var getInternshipsCallback = function(error, cursor){
+var getInternshipsCallback = function (error, cursor) {
   //Since there should only be one user;
-  console.log("internships:");
+  console.log('internships:');
   console.log(cursor[0]);
-  console.log(cursor[0]["internships"]);
-  if(cursor[0]["internships"]) {
-    internshipRes.send(cursor[0]["internships"]["companies"]);
+  console.log(cursor[0]['internships']);
+  if (cursor[0]['internships']) {
+    internshipRes.send(cursor[0]['internships']['companies']);
   } else {
-    return([]);
+    return ([]);
   }
 };
 

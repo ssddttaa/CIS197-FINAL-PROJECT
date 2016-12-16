@@ -1,22 +1,3 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-a {
-  color: #00B7FF;
-}
-
-td,th {
-  padding-top: 1em;
-}
-
-.single-stock{
-  font-weight: bold;
-  font-size: 3rem;
-}
-
-
 .loginBox{
   background-color: #ecf0f1;
   display:flex;
@@ -40,4 +21,56 @@ td,th {
 
 .footer-row{
   background: #0C2032 !important;
+}
+
+/*http://stackoverflow.com/questions/356809/best-way-to-center-a-div-on-a-page-vertically-and-horizontally*/
+.login-box-container{
+  width : 400px;
+  height: 300px;
+  position:absolute;
+  opacity: .9;
+  top:0; left:0; right:0; bottom:0;
+  margin:auto;
+}
+
+.background-class{
+  background-image: url('../media/interns3.jpg');
+  background-repeat: no-repeat;
+  /*background-size: 100% 100%;*/
+  margin: 0 !important;
+  height: 100% !important;
+}
+
+.enforce-min-width{
+  min-width:150px;
+}
+
+option[selected="selected"]{
+  background-color: yellow;
+}
+
+.accepted-row{
+  background: #2ecc71;
+}
+
+.pending-row{
+  background: #f1c40f;
+}
+
+.rejected-row {
+  background: #e74c3c;
+}
+
+.striped-background{
+  /* This is striped */
+  background: linear-gradient(#6BB9F0 50%, #95CEF7 50%);
+}
+
+.internships-container{
+  width : 400px;
+  height: 300px;
+  position:absolute;
+  opacity: .9;
+  top:0; left:0; right:800px; bottom:300px;
+  margin:auto;
 }

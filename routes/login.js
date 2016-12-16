@@ -11,44 +11,53 @@ var regularRes;
 var regularReq;
 var nextError;
 
-router.get('/linkedin', function(req, res, next){
+router.get('/linkedin', function (req, res, next) {
   request('http://localhost:3000/constants/constants.json', function (error, response, body) {
     if (!error && response.statusCode == 200) {
-      var api_key = JSON.parse(body)["api_key"];
-      res.redirect('https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id='+api_key+'&redirect_uri=http://localhost:3000/auth/linkedin/callback&state=987654321&scope=r_basicprofile');
+      var api_key = JSON.parse(body)['api_key'];
+      res.redirect('https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=' + api_key + '&redirect_uri=http://localhost:3000/auth/linkedin/callback&state=987654321&scope=r_basicprofile');
     } else {
       next(error);
     }
   });
 });
 
-router.post('/regular', function(req, res, next){
-  console.log("triggering regular");
+router.post('/regular', function (req, res, next) {
+  console.log('triggering regular');
   regularRes = res;
   regularReq = req;
   nextError = next;
-  var collection = mongo["db"].collection('regular_users').find({
-    email : req.body.email,
+  var collection = mongo['db'].collection('regular_users').find({
+    email: req.body.email,
     password: req.body.password
-  }, function(error, cursor){
-    console.log("done getting stuff");
-    cursor.toArray(getUsersCallback);
+  }, function (error, cursor) {
+    if(!error) {
+      console.log('done getting stuff');
+      cursor.toArray(getUsersCallback);
+    } else{
+      res.end();
+    }
+
   });
 });
 
-var getUsersCallback = function(error, cursor){
-  console.log("getting users callback");
-  if(cursor.length == 0){
-    console.log("incorrect");
-    nextError("Incorrect login");
+router.get('/logout', function (req, res){
+  console.log("posted yo");
+  req.session = null;
+  res.redirect('http://localhost:3000/');
+});
+
+var getUsersCallback = function (error, cursor) {
+  console.log('getting users callback');
+  if (cursor.length == 0) {
     regularReq.session.isAuthorized = false;
   } else {
-    console.log("correct");
+    console.log('correct');
     regularReq.session.isAuthorized = true;
     regularReq.session.email = regularReq.body.email;
     regularReq.session.password = regularReq.body.password;
   }
   console.log(regularReq.session);
-  regularRes.redirect('/');
+  regularRes.redirect('http://localhost:3000/');
 };
 module.exports = router;

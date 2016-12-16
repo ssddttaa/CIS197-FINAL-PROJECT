@@ -1,6 +1,6 @@
 $(function () {
   var InternshipCollection = Backbone.Collection.extend({
-    model : InternshipModel
+    model: InternshipModel
   });
   window.InternshipCollection = InternshipCollection;
 });
